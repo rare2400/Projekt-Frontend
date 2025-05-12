@@ -8,14 +8,19 @@
 @use "base";
 
 /* components */
-@use "buttons"; 
+@use "./components/buttons"; 
+@use "./components/searchbar.scss";
+@use "./components/menubtn";
 
 /* layout */
 @use "./layout/layout";
 @use "./layout/mediaqueries";
+@use "./layout/navigation";
 
 /* pages */
-@use "pages";
+@use "./pages/home";
+@use "./pages/about";
+@use "./pages/artist";
 
 /* animations */
 @use "animations";
