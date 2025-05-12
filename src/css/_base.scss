@@ -1,0 +1,19 @@
+@use "./abstracts/variables";
+
+body {
+    background-color: variables.$background-color;
+    margin: 0;
+    line-height: 1.5rem;
+    overflow-x: hidden;
+}
+
+h1 {
+    a {
+        text-decoration: none;
+        color: variables.$black;
+    }
+}
+
+h2 {
+    text-align: center;
+}
