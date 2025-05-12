@@ -1,0 +1,26 @@
+@use "../abstracts/variables";
+
+header {
+    background-color: variables.$header-color;
+    height: 4rem;
+
+    .header-div {
+        display: grid;
+        grid-template-columns: repeat(4, 1fr);
+        align-items: center;
+        height: 100%;
+    }
+
+    .logo {
+        width: 50px;
+        height: auto;
+        margin: auto 1rem;
+    }
+}
+
+footer {
+    background-color: variables.$footer-color;
+    padding: 0.3rem;
+    text-align: center;
+    color: variables.$white;
+}
