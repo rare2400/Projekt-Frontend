@@ -1,0 +1,29 @@
+@keyframes moveAround {
+    0% {
+        transform: rotate(135deg);
+    }
+
+    100% {
+        transform: rotate(45deg);
+    }
+}
+
+@keyframes moveAround2 {
+    0% {
+        transform: rotate(45deg);
+    }
+
+    100% {
+        transform: rotate(135deg);
+    }
+}
+
+@keyframes fadeIn {
+    0% {
+        opacity: 0;
+    }
+
+    100% {
+        opacity: 1;
+    }
+}
