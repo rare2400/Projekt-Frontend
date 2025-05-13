@@ -6,7 +6,7 @@ header {
 
     .header-div {
         display: grid;
-        grid-template-columns: repeat(4, 1fr);
+        grid-template-columns: repeat(5, 1fr);
         align-items: center;
         height: 100%;
     }
@@ -20,7 +20,24 @@ header {
 
 footer {
     background-color: variables.$footer-color;
-    padding: 0.3rem;
+    padding: 1rem;
     text-align: center;
     color: variables.$white;
+
+    h3 {
+        margin: 0.4em 0;
+        font-size: 1.2rem;
+    }
+
+    p {
+        margin: 0;
+    }
+
+    a {
+        color: variables.$white;
+
+        &:hover {
+            font-weight: bold;
+        }
+    }
 }
