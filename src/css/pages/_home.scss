@@ -1,0 +1,19 @@
+@use "../abstracts/variables";
+
+.hero-image {
+    text-align: center;
+    animation: moveIn 3s ease;
+
+    img {
+        box-shadow: 0 0 10px rgba(0, 0, 0, 0.5);
+        width: 100%;
+        height: auto;
+    }
+}
+
+.content {
+    background-color: variables.$white;
+    padding: 2em;
+    max-width: 60em;
+    margin: 0 auto;
+}
