@@ -1,0 +1,9 @@
+@use "../abstracts/mixins";
+
+.icons {
+    text-align: center;
+
+    .so-me-icon {
+        @include mixins.icon(1.3rem, 1.3rem, 2% 5%);
+    }
+}

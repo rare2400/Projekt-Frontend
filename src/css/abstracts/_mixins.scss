@@ -7,3 +7,12 @@
     background-color: $bg-color;
     margin: $margin;
 }
+
+//icon mixin
+@mixin icon($width, $height, $margin) {
+    width: $width;
+    height: $height;
+    vertical-align: -0.125em;
+    margin: $margin;
+    cursor: pointer;
+}
