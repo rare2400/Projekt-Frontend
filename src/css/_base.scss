@@ -1,21 +1,18 @@
 @use "./abstracts/variables";
 
 body {
-    background-color: variables.$background-color;
+    background-color: variables.$white;
     margin: 0;
     line-height: 1.5rem;
     overflow-x: hidden;
 }
 
 h1 {
-    text-align: center;
-
-    a {
-        text-decoration: none;
-        color: variables.$black;
-    }
+    font-size: 2rem;
+    color: variables.$header-color;
+    margin: 0 0 1em;
 }
 
-h2 {
+h1, h2 {
     text-align: center;
 }
