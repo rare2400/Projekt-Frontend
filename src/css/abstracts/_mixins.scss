@@ -16,3 +16,10 @@
     margin: $margin;
     cursor: pointer;
 }
+
+//mixin for sizes
+@mixin size($bg-color, $height, $width) {
+    background-color: $bg-color;
+    height: $height;
+    width: $width;
+}
