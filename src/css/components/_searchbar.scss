@@ -1,4 +1,5 @@
 @use "../abstracts/variables";
+@use "../abstracts/mixins";
 
 /* sökbox */
 .search-container {
@@ -18,13 +19,16 @@
     }
 
     button {
-        background: none;
+        vertical-align: -0.125em;
+        background-color: transparent;
         border: none;
         cursor: pointer;
         font-size: 1.5rem;
     }
 
     .search-icon {
-        color: variables.$white;
+        @include mixins.icon(1.3rem, 1.3rem, 2%);
     }
+
+    
 }
