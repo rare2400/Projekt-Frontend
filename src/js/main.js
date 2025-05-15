@@ -3,22 +3,25 @@
 
 //function for opening/closing nav-menu
 //elements
-let openBtn = document.getElementById("open-menu");
-let closeBtn = document.getElementById("close-menu");
+const openBtn = document.getElementById("open-menu");
+const closeBtn = document.getElementById("close-menu");
 
 
 //eventlisteners
 openBtn.addEventListener('click', toggleMenu);
 closeBtn.addEventListener('click', toggleMenu);
 
-
+/**
+ * display/hide the navigationmenu
+ * @function toggleMenu
+ * @returns {void}
+ */
 function toggleMenu() {
-   let navMenuEl = document.getElementById("nav-menu");
-
+   const navMenuEl = document.getElementById("nav-menu");
 
    let style = window.getComputedStyle(navMenuEl)
 
-
+    //check if the menu is open or closed
    if (style.display === "none") {
        navMenuEl.style.display = "block";
    } else {
