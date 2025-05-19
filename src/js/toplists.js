@@ -3,16 +3,14 @@
 //Last.fm api key
 const apikey = "1fceb8e923bab7aefbfc3b7b526a26ab"
 
-//function to get top artists and top tracks
+//function to get toplists - artists and tracks
 getTracksAndArtists();
 
 /**
- * get data from Last.fm API
+ * fetch data from Last.fm API
  * 
- * @async
- * @function getData
  * @param {string} method - API-method used to fetch data from API
- * @param {number} limit - Number of items to fetch
+ * @param {number} limit - Number of objects to fetch
  * @returns {Promise<Object>} - JSON response from API
  */
 async function getData(method, limit) {
@@ -21,6 +19,10 @@ async function getData(method, limit) {
     try {
         const response = await fetch(url);
         const data = await response.json();
+        if(!response.ok) {
+            throw new Error('Fel vid hämtning av data');
+        }
+
         console.log(data);
         return data;
     } catch (error) {
@@ -31,8 +33,6 @@ async function getData(method, limit) {
 /**
  * get top artists and top tracks from api and display them
  * 
- * @async
- * @function getTracksAndArtists
  * @returns {Promise<void>} No return value
  */
 async function getTracksAndArtists() {
@@ -53,7 +53,6 @@ async function getTracksAndArtists() {
  * 
  * Display top artists in the DOM
  * 
- * @function displayTopArtists
  * @param {Array<Object>} topArtists - Array of top artists from Last.fm API
  * @returns {void} No return value
  */
@@ -88,7 +87,6 @@ function displayTopArtists(topArtists) {
  * 
  * Display top tracks in the DOM
  * 
- * @function displayTopCharts
  * @param {Array<Object>} topCharts - Array of top tracks from Last.fm API
  * @return {void} No return value
  */
