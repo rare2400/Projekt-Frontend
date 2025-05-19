@@ -23,3 +23,14 @@
     height: $height;
     width: $width;
 }
+
+//mixin för boxar
+@mixin text-box ($margin, $padding, $radius, $box-shadow: 0) {
+    margin: $margin;
+    padding: $padding;
+    border-radius: $radius;
+
+    @if $box-shadow !=0 {
+        box-shadow: $box-shadow;
+    }
+}
