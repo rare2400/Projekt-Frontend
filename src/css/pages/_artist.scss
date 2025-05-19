@@ -1,5 +1,48 @@
 @use "../abstracts/mixins";
+@use "../abstracts/variables";
+@use "../abstracts/placeholders";
+
+.artist-info {
+    img {
+        box-shadow: 0 0 10px rgba(0, 0, 0, 0.3);
+    }
+    text-align: center;
+}
 
 .text-box {
-    @include mixins.text-box(1em, 0.5em 0, 10px, 0 0 10px rgba(0, 0, 0, 0.5) inset)
+    @include mixins.text-box(1em, 0.5em 0, 10px, 0 0 10px rgba(0, 0, 0, 0.5) inset);
+
+    a {
+        text-decoration: none;
+        color: variables.$black;
+        font-size: 1.2em;
+        display: block;
+        transition: background-color 0.5s;
+
+    }
+}
+
+.top-tracks,
+.similar-artists {
+    p {
+        padding: 1em 1.5em;
+        margin: 0;
+
+        &:hover {
+            @extend %hover-pink;
+        }
+    }
+}
+
+.concert-container {
+    padding: 0.5em 1.5em;
+    margin: 0;
+
+    a:hover {
+        text-decoration: underline;
+    }
+
+    &:hover {
+        @extend %hover-pink
+    }
 }
