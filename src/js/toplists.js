@@ -69,8 +69,8 @@ function displayTopArtists(topArtists) {
             const listItem = document.createElement("li");
             const artistLink = document.createElement("a");
 
-            artistLink.href = artist.url;
-            artistLink.target = "_blank";
+            artistLink.href = `artist.html?artist=${encodeURIComponent(artist.name)}`;
+            artistLink.target = "_self";
             artistLink.textContent = artist.name;
 
             listItem.appendChild(artistLink);
