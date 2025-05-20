@@ -72,8 +72,6 @@ async function displayArtistInfo(artist) {
     // Rensa tidigare resultat
     artistInfo.innerHTML = "";
 
-    console.log(artist);
-
     if (artist) {
         const artistName = document.createElement("h1");
         const artistImage = document.createElement("img");
@@ -104,7 +102,6 @@ async function getTopTracks(artistName) {
     try {
         const response = await fetch(url);
         const data = await response.json();
-        console.log(data);
         displayTopTracks(data.toptracks.track);
     } catch (error) {
         console.error("Fel vid hämtning av topplåtar", error);
@@ -151,7 +148,6 @@ async function getSimilarArtists(artistName) {
     try {
         const response = await fetch(url);
         const data = await response.json();
-        console.log(data);
         displaySimilarArtists(data.similarartists.artist);
     } catch (error) {
         console.error("Fel vid hämtning av liknande artister", error);
@@ -183,6 +179,9 @@ function displaySimilarArtists(artists) {
         });
     } else {
         console.log("Inga liknande artister hittades.");
+        const errorMessage = document.createElement("p");
+        errorMessage.textContent = "Inga liknande artister hittades.";
+        similarArtistsList.appendChild(errorMessage);
     }
 }
 
@@ -197,7 +196,8 @@ async function getConcerts(artistName) {
     try {
         const response = await fetch(url);
         const data = await response.json();
-        console.log(data);
+
+        console.log(url, data)
 
         if (data._embedded && data._embedded.events) {
             displayConcerts(data._embedded.events);
@@ -231,19 +231,22 @@ function displayConcerts(concerts) {
             const concertInfo = document.createElement("p");
             const ticketLink = document.createElement("a");
 
+            //variables for each 
             const name = concert.name;
             const date = concert.dates.start.localDate;
-            const venues = concert._embedded.venues[0].name;
-            const city = concert._embedded.venues[0].city.name;
             const url = concert.url;
+            const venues = concert._embedded?.venues?.[0];
+
+            const venueName = venues?.name || "Okänd arena/plats";
+            const city = venues?.city?.name || "Okänd stad";
 
 
             //create link to buy tickets to the concert
             ticketLink.href = url;
             ticketLink.target = "_blank";
-            ticketLink.textContent = `${name}`;
+            ticketLink.textContent = name;
 
-            concertInfo.textContent = ` ${date} - ${venues}, ${city}`;
+            concertInfo.textContent = ` ${date} - ${venueName}, ${city}`;
 
             // Append elements to the container
             concertName.appendChild(ticketLink);
