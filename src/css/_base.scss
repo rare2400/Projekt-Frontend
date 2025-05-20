@@ -5,12 +5,15 @@ body {
     margin: 0;
     line-height: 1.5rem;
     overflow-x: hidden;
+    font-family: variables.$font-stack;
 }
 
 h1 {
     font-size: 2rem;
     color: variables.$header-color;
     margin: 0 0 1em;
+    font-family: variables.$heading-font;
+    font-weight: 700;
 }
 
 h1, h2 {
