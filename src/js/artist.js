@@ -24,6 +24,25 @@ function init() {
 }
 
 /**
+ * fetch image of the searched artist from Deezers API
+ * 
+ * @param {string} artistName - name of the artist to fetch info about
+ * @returns {Promise<void>}
+ */
+async function getImage(artistName) {
+    const url = `https://api.deezer.com/search/artist?q=${encodeURIComponent(artistName)}`;
+
+    try {
+        const response = await fetch(`https://corsproxy.io/?${encodeURIComponent(url)}`);
+        const data = await response.json();
+        const image = data.data[0].picture_medium;
+        return image;
+    } catch (error) {
+        console.error("fel vid hämtning av artistbild", error);
+    }
+}
+
+/**
  * fetch info about the searched artist from Last.fm API
  * 
  * @param {string} artistName - name of the artist to fetch info about
@@ -48,7 +67,7 @@ async function getArtistInfo(artistName) {
  * @param {Object} artist - artistobject from API
  * @returns {void}
  */
-function displayArtistInfo(artist) {
+async function displayArtistInfo(artist) {
     const artistInfo = document.querySelector(".artist-info");
     // Rensa tidigare resultat
     artistInfo.innerHTML = "";
@@ -59,13 +78,12 @@ function displayArtistInfo(artist) {
         const artistName = document.createElement("h1");
         const artistImage = document.createElement("img");
 
-        artistName.textContent = artist.name;
+        const name = artist.name;
+        artistName.textContent = name;
 
-        const image = artist.image.find(img => img.size === "large" && img["#text"]);
-        if (image) {
-            artistImage.src = image ? image["#text"] : "";
-            artistImage.alt = `Bild på ${artist.name}`;
-        }
+        const image = await getImage(name);
+        artistImage.src = image;
+        artistImage.alt = `Bild på ${name}`;
 
         artistInfo.appendChild(artistName);
         artistInfo.appendChild(artistImage);
@@ -106,7 +124,7 @@ function displayTopTracks(tracks) {
 
     if (tracks.length > 0) {
         tracks.forEach(track => {
-            const listItem = document.createElement("p");
+            const listItem = document.createElement("li");
             const trackLink = document.createElement("a");
 
             trackLink.href = track.url;
@@ -156,8 +174,8 @@ function displaySimilarArtists(artists) {
             const listItem = document.createElement("p");
             const artistLink = document.createElement("a");
 
-            artistLink.href = artist.url;
-            artistLink.target = "_blank";
+            artistLink.href = `artist.html?artist=${encodeURIComponent(artist.name)}`;
+            artistLink.target = "_self";
             artistLink.textContent = artist.name;
 
             listItem.appendChild(artistLink);
@@ -207,6 +225,8 @@ function displayConcerts(concerts) {
     if (concerts && concerts.length > 0) {
         concerts.forEach(concert => {
             //create elements for concert information
+            const container = document.createElement("div")
+            container.classList.add("concert-container");
             const concertName = document.createElement("h3");
             const concertInfo = document.createElement("p");
             const ticketLink = document.createElement("a");
@@ -227,8 +247,9 @@ function displayConcerts(concerts) {
 
             // Append elements to the container
             concertName.appendChild(ticketLink);
-            concertList.appendChild(concertName);
-            concertList.appendChild(concertInfo);
+            container.appendChild(concertName);
+            container.appendChild(concertInfo);
+            concertList.appendChild(container);
         });
     } else {
         console.log("Inga konserter hittades för denna artist.");
