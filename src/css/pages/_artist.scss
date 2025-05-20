@@ -6,11 +6,20 @@
     img {
         box-shadow: 0 0 10px rgba(0, 0, 0, 0.3);
     }
+
     text-align: center;
 }
 
 .text-box {
     @include mixins.text-box(1em, 0.5em 0, 10px, 0 0 10px rgba(0, 0, 0, 0.5) inset);
+
+    h1 {
+        margin: 0.6em;
+    }
+
+    h2 {
+        margin-bottom: 0;
+    }
 
     a {
         text-decoration: none;
@@ -24,13 +33,20 @@
 
 .top-tracks,
 .similar-artists {
-    p {
+    p,
+    li {
         padding: 1em 1.5em;
         margin: 0;
+    }
 
-        &:hover {
-            @extend %hover-pink;
-        }
+    li:hover {
+        text-decoration: underline;
+    }
+}
+
+.similar-artists {
+    p:hover {
+        @extend %hover-pink;
     }
 }
 
@@ -40,9 +56,5 @@
 
     a:hover {
         text-decoration: underline;
-    }
-
-    &:hover {
-        @extend %hover-pink
     }
 }
