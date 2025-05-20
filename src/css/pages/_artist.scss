@@ -1,6 +1,7 @@
 @use "../abstracts/mixins";
 @use "../abstracts/variables";
 @use "../abstracts/placeholders";
+@use "../abstracts/keyframes";
 
 .artist-info {
     img {
@@ -12,9 +13,11 @@
 
 .text-box {
     @include mixins.text-box(1em, 0.5em 0, 10px, 0 0 10px rgba(0, 0, 0, 0.5) inset);
+    animation: moveIn 3s ease;
 
-    h1 {
-        margin: 0.6em;
+    h1,
+    h3 {
+        margin: 0.6em 0;
     }
 
     h2 {
@@ -33,6 +36,7 @@
 
 .top-tracks,
 .similar-artists {
+
     p,
     li {
         padding: 1em 1.5em;
@@ -53,6 +57,15 @@
 .concert-container {
     padding: 0.5em 1.5em;
     margin: 0;
+    border-bottom: 1px solid rgba(0, 0, 0, 0.17);
+
+    &:hover {
+        @extend %hover-pink;
+    }
+
+    p {
+        margin-top: 0.6em;
+    }
 
     a:hover {
         text-decoration: underline;
