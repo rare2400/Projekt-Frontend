@@ -143,7 +143,7 @@ function displayTopTracks(tracks) {
  * @returns {Promise<void>}
  */
 async function getSimilarArtists(artistName) {
-    const url = `https://ws.audioscrobbler.com/2.0/?method=artist.getsimilar&artist=${encodeURIComponent(artistName)}&api_key=${apikey}&format=json&limit=5`;
+    const url = `https://ws.audioscrobbler.com/2.0/?method=artist.getsimilar&artist=${encodeURIComponent(artistName)}&api_key=${apikey}&format=json&limit=10`;
 
     try {
         const response = await fetch(url);
@@ -192,7 +192,7 @@ function displaySimilarArtists(artists) {
  * @returns {Promise<void>}
  */
 async function getConcerts(artistName) {
-    const url = `https://app.ticketmaster.com/discovery/v2/events.json?keyword=${encodeURIComponent(artistName)}&apikey=${concertApikey}`;
+    const url = `https://app.ticketmaster.com/discovery/v2/events.json?keyword=${encodeURIComponent(artistName)}&apikey=${concertApikey}&size=10`;
     try {
         const response = await fetch(url);
         const data = await response.json();
