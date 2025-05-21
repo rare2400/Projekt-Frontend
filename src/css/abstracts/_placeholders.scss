@@ -2,8 +2,8 @@
 
 //placeholder for hovering
 %hover-pink {
-    background-color: variables.$pink;
     cursor: pointer;
     transition: 1.5s ease;
+    transform: translateY(4px);
     box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.349);
 }
