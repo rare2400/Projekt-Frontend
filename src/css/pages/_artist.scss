@@ -3,17 +3,23 @@
 @use "../abstracts/placeholders";
 @use "../abstracts/keyframes";
 
+.main-content {
+    animation: fadeIn 2s ease;
+}
+
 .artist-info {
+    text-align: center;
+
     img {
         box-shadow: 0 0 10px rgba(0, 0, 0, 0.3);
+        animation: fadeIn 2s ease;
     }
 
-    text-align: center;
 }
 
 .text-box {
     @include mixins.text-box(1em, 0.5em 0, 10px, 0 0 10px rgba(0, 0, 0, 0.5) inset);
-    animation: moveIn 3s ease;
+
 
     h1,
     h3 {

@@ -13,6 +13,10 @@
     }
 }
 
+.content {
+    animation: fadeIn 3s ease;
+}
+
 .list-container,
 .artist-concerts {
     @include mixins.text-box(1em, 0.5em 0, 10px, 0 0 10px rgba(0, 0, 0, 0.5) inset);
