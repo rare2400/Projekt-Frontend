@@ -13,8 +13,10 @@
     }
 }
 
-.list-container {
+.list-container,
+.artist-concerts {
     @include mixins.text-box(1em, 0.5em 0, 10px, 0 0 10px rgba(0, 0, 0, 0.5) inset);
+    height: 95%;
 
     .li-container {
         padding: 0.8em 4em;
@@ -48,7 +50,7 @@
         &:hover {
             @extend %hover-pink
         }
-    } 
+    }
 
     h3 {
         font-size: 1em;
@@ -56,9 +58,5 @@
         &:hover {
             text-decoration: underline;
         }
-    }
-    
-    li {
-        list-style-type: none;
     }
 }
