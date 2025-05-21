@@ -37,7 +37,7 @@ async function getData(method, limit) {
  */
 async function getTracksAndArtists() {
     try {
-        const artistData = await getData("chart.gettopartists", 5);
+        const artistData = await getData("chart.gettopartists", 10);
         const topArtists = artistData.artists.artist;
         displayTopArtists(topArtists);
 
