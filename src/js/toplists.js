@@ -11,7 +11,9 @@ getTracksAndArtists();
  * 
  * @param {string} method - API-method used to fetch data from API
  * @param {number} limit - Number of objects to fetch
- * @returns {Promise<Object>} - JSON response from API
+ * @returns {Promise<Object>} JSON response from API
+ * @throws {error} when error fetching data
+ * 
  */
 async function getData(method, limit) {
     const url = `https://ws.audioscrobbler.com/2.0/?method=${method}&api_key=${apikey}&format=json&limit=${limit}`;
@@ -19,9 +21,7 @@ async function getData(method, limit) {
     try {
         const response = await fetch(url);
         const data = await response.json();
-        if(!response.ok) {
-            throw new Error('Fel vid hämtning av data');
-        }
+        if(!response.ok) throw new Error('Fel vid hämtning av data');
 
         console.log(data);
         return data;
