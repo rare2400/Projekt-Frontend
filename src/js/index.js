@@ -13,9 +13,8 @@ navigator.geolocation.getCurrentPosition(success, error);
 /**
  * success callback for geolocation, fetches concerts from Ticketmaster API
  * 
- * @async
- * @function success
- * @param {GeolocationPosition} position - The object containing the users location
+ * @param {GeolocationPosition} position - The users geolocation data
+ * @returns {Promise<void>}
  */
 
 async function success(position) {
@@ -26,103 +25,106 @@ async function success(position) {
 
     //fetch concerts from Ticketmaster API using the location
     const concerts = await getConcerts(lat, lon);
-    displayConcerts(concerts);
+    displayMap(lat, lon, concerts);
 }
 
 /**
- * function if geolocation fails
+ * error-function if geolocation fails
  * 
- * @async
- * @function error
- * @param {GeolocationPositionError} error - Errormessage from geolocation
+ * @param {GeolocationPositionError} error - Error from geolocation
+ * @returns {Promise<void>}
  */
-function error(error) {
+async function error(error) {
     console.error("Kunde inte hitta position.", error);
 
-    //fetch concerts from Ticketmaster API using the fallback coordinates
-    const concerts = getConcerts(fallbackCoord.lat, fallbackCoord.lon)
-    displayConcerts(concerts);
+    try {
+        //fetch concerts from Ticketmaster API using the fallback coordinates
+        const concerts = await getConcerts(fallbackCoord.lat, fallbackCoord.lon);
+        displayMap(fallbackCoord.lat, fallbackCoord.lon, concerts);
+    } catch {
+        console.error("Kunde inte hämta konserter med fallback-position:", error);
+    }
+
 }
 
 /**
  * fetch conserts from Ticketmaster API based on coordinates
  * 
- * @async
- * @function getConcerts
- * @param {number} lat - latitude coorinate
+ * @param {number} lat - latitude coordinate
  * @param {number} lon - longitude coordinate
- * @returns {Promise<Array>} - return array of concert objects
+ * @returns {Promise<Object[]>} Array of concert objects
+ * @throws {Error} - Throws error if response data is 
  */
 async function getConcerts(lat, lon) {
     const radius = 100;
-    const url = `https://app.ticketmaster.com/discovery/v2/events.json?apikey=${ApiKey}&latlong=${lat},${lon}&radius=${radius}&unit=km`;
+    const url = `https://app.ticketmaster.com/discovery/v2/events.json?apikey=${ApiKey}&latlong=${lat},${lon}&radius=${radius}&unit=km&size=10`;
 
     try {
         const response = await fetch(url);
-        if (!response.ok) {
-            throw new Error(`HTTP error! status: ${response.status}`);
-        }
+        if (!response.ok) throw new Error(`error: ${response.status}`);
+
         const data = await response.json();
         console.log(data);
 
         if (data._embedded && data._embedded.events) {
             return data._embedded.events;
         } else {
-            console.error("No concerts found in the response.");
+            console.error("Inga konserter hittade.");
             return [];
         }
 
     } catch (error) {
-        console.error("Error fetching concerts:", error);
+        console.error("Error när konserter ska hämtas", error);
         //Return an empty array if there was an error
         return [];
     }
 }
 
 /**
- * display concerts in the DOM
+ * display concerts on map
  * 
- * @function displayConcerts
- * @param {Array<Object>} concerts - array of concert objects
+ * @param {number} lat - latitude coordinate
+ * @param {number} lon - longitude coordinate
+ * @param {Object[]} concerts - array of concert objects
  * @returns {void} No return value
  */
-function displayConcerts(concerts) {
+function displayMap(lat, lon, concerts) {
+    const map = L.map('map').setView([lat, lon], 12);
     const concertList = document.querySelector(".concert-list");
-    //clear the concert list
     concertList.innerHTML = "";
 
-    if (concerts.length > 0) {
-        concerts.forEach(concert => {
-            //create elements for concert information
-            const concertcontainer = document.createElement("div");
-            concertcontainer.classList.add("concert-container");
-            const concertName = document.createElement("h3");
-            const concertInfo = document.createElement("p");
-            const ticketLink = document.createElement("a");
+    L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
+        attribution: '&copy; OpenStreetMap contributors'
+    }).addTo(map);
 
-
-            const name = concert.name;
-            const date = concert.dates.start.localDate;
-            const city = concert._embedded.venues[0].city.name;
-            const url = concert.url;
-
-            //create link to buy tickets to the concert
-            ticketLink.href = url;
-            ticketLink.target = "_blank";
-            ticketLink.textContent = name;
-
-            //info about the concert (where and when)
-            concertInfo.textContent = `${city} - ${date}`;
-
-            //element structure
-            concertName.appendChild(ticketLink);
-            concertcontainer.appendChild(concertName);
-            concertcontainer.appendChild(concertInfo);
-            concertList.appendChild(concertcontainer);
-        });
-    } else {
+    if (concerts.length === 0) {
         //message to user if no concerts are found
-        concertList.textContent = "Inga konserter hittades.";
-        concertList.style.padding = "1em 2em";
+        concertList.textContent = "Inga konserter hittades i din närhet.";
+        concertList.style.padding = "0.5em 2em";
+        return;
     }
+
+    concerts.forEach(concert => {
+        const name = concert.name;
+        const date = concert.dates.start.localDate;
+        const venue = concert._embedded.venues?.[0];
+        const url = concert.url;
+
+        if (venue?.location?.latitude && venue?.location?.longitude) {
+            const lat = venue.location.latitude;
+            const lon = venue.location.longitude;
+
+            const venueName = venue?.name || "Okänd arena/plats";
+            const city = venue?.city?.name || "Okänd stad";
+
+            const popupContent = `
+                <a href="${url}" target="_blank">
+                    ${name} - ${venueName}, ${city}: ${date}
+                </a>`;
+
+            L.marker([lat, lon])
+                .addTo(map)
+                .bindPopup(popupContent);
+        }
+    });
 }
