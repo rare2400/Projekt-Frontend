@@ -22,6 +22,10 @@
     @include mixins.text-box(1em, 0.5em 0, 10px, 0 0 10px rgba(0, 0, 0, 0.5) inset);
     height: 95%;
 
+    h2 {
+        margin-bottom: 0.5em;
+    }
+
     .li-container {
         padding: 0.8em 4em;
 
@@ -35,32 +39,6 @@
     }
 
     a {
-        text-decoration: none;
-        color: variables.$black;
-        font-size: 1.2em;
-        display: block;
-        transition: background-color 0.5s;
-
-    }
-}
-
-.concert-list {
-    padding: 0;
-
-    .concert-container {
-        padding: 0.5em 2em;
-        border-bottom: 1px solid rgba(0, 0, 0, 0.17);
-
-        &:hover {
-            @extend %hover-pink
-        }
-    }
-
-    h3 {
-        font-size: 1em;
-
-        &:hover {
-            text-decoration: underline;
-        }
+        @extend %link
     }
 }

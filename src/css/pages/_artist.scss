@@ -31,12 +31,7 @@
     }
 
     a {
-        text-decoration: none;
-        color: variables.$black;
-        font-size: 1.2em;
-        display: block;
-        transition: background-color 0.5s;
-
+        @extend %link
     }
 }
 
