@@ -4,9 +4,6 @@
 @use "./abstracts/variables";
 @use "./abstracts/keyframes";
 
-/* base */
-@use "base";
-
 /* components */
 @use "./components/buttons"; 
 @use "./components/searchbar.scss";

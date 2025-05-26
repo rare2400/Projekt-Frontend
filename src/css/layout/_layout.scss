@@ -1,5 +1,13 @@
 @use "../abstracts/variables";
 
+body {
+    background-color: variables.$white;
+    margin: 0;
+    line-height: 1.5rem;
+    overflow-x: hidden;
+    font-family: variables.$font-stack;
+}
+
 header {
     background-color: variables.$header-color;
     height: 4rem;
@@ -23,6 +31,18 @@ header {
     padding: 2em;
     max-width: 60em;
     margin: 0 auto;
+}
+
+h1 {
+    font-size: 2rem;
+    color: variables.$header-color;
+    margin: 0 0 1em;
+    font-family: variables.$heading-font;
+    font-weight: 700;
+}
+
+h1, h2 {
+    text-align: center;
 }
 
 footer {
