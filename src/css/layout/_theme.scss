@@ -38,7 +38,7 @@
     .list-container,
     .artist-concerts,
     .text-box {
-        background-color: variables.$lighter-grey;
+        background-color: variables.$lighter-grey !important;
     }
 
     .content,
