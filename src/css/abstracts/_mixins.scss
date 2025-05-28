@@ -1,4 +1,10 @@
 //mixins
+//mixin grid
+@mixin grid ($columns: 2) {
+    display: grid;
+    grid-template-columns: repeat($columns, 1fr);
+}
+
 //mixin för hamburger-icon
 @mixin menu-icon($display, $width, $height, $bg-color, $margin) {
     display: $display;
