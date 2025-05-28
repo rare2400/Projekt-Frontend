@@ -15,6 +15,10 @@
 
 .content {
     animation: fadeIn 3s ease;
+
+    h1 {
+        animation: color-change 10s 1s linear 5;
+    }
 }
 
 .list-container,
