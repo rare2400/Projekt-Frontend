@@ -13,3 +13,18 @@
         @extend %zoom-hover;
     }
 }
+
+.back-btn {
+    @include mixins.button(variables.$pink, 0.5em, 1em 2em 0, 0);
+    font-size: 0.8em;
+    max-width: 20%;
+
+    &:hover {
+        @extend %zoom-hover;
+    }
+
+    a {
+        @extend %link;
+        color: variables.$white;
+    }
+}

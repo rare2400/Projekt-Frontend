@@ -30,6 +30,20 @@
     width: $width;
 }
 
+//mixin for button
+@mixin button($bg-color, $padding, $margin, $border: 0) {
+    background-color: $bg-color;
+    padding: $padding;
+    margin: $margin;
+    
+    @if $border !=0 {
+        border: $border;
+    }
+
+    cursor: pointer;
+    text-align: center;
+}
+
 //mixin för boxar
 @mixin text-box ($margin, $padding, $radius, $box-shadow: 0) {
     margin: $margin;
