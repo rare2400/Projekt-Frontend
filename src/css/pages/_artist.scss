@@ -19,7 +19,7 @@
         animation: fadeIn 2s ease;
 
         &:hover {
-            animation: hover 7s linear;
+            animation: hover 7s linear infinite;
             border-radius: 50%
         }
     }
@@ -39,6 +39,11 @@
         margin-bottom: 0;
     }
 
+    .info-text {
+        text-align: center;
+        font-size: 0.8em;
+    }
+
     a {
         @extend %link
     }
@@ -51,16 +56,24 @@
     li {
         padding: 1em 1.5em;
         margin: 0;
+        font-size: 0.8em;
     }
 
-    li:hover {
-        text-decoration: underline;
+    .li-row {
+        @include mixins.grid(6);
+        margin-right: 1em;
+        align-items: center;
+        cursor: pointer;
+
+        li {
+            grid-column: 1/5;
+        }
     }
 }
 
 .similar-artists {
     p:hover {
-        @extend %hover-pink;
+        @extend %hover;
     }
 }
 
@@ -70,11 +83,16 @@
     border-bottom: 1px solid rgba(0, 0, 0, 0.17);
 
     &:hover {
-        @extend %hover-pink;
+        @extend %hover;
+    }
+
+    h3 {
+        font-size: 1em;
     }
 
     p {
         margin-top: 0.6em;
+        font-size: 0.8em;
     }
 
     a:hover {
