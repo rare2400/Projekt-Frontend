@@ -4,13 +4,15 @@
   "source": "src/index.html",
   "scripts": {
     "start": "parcel",
-    "build": "parcel build"
+    "jsdoc": "jsdoc src/js/*",
+    "build": "parcel build && jsdoc src/js/*"
   },
   "author": "Ramona Reinholdz",
   "license": "ISC",
   "description": "",
   "devDependencies": {
     "@parcel/transformer-sass": "^2.13.3",
+    "jsdoc": "^4.0.4",
     "parcel": "^2.13.3"
   },
   "browserslist": "> 0.5%, last 2 versions, not dead"
