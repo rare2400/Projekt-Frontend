@@ -5,10 +5,13 @@ $header-color: #224142;
 $footer-color: #0F0F1c;
 $background-color: #F5F1E3;
 $pink: #FF008C;
-$turkos: #00FFD1;
 
 //dark colors
-$dark-background: #1b1b1b;
+$dark-background: #121212;
+$lighter-grey: lighten($dark-background, 10%);
+$footer-dark: #08080F;
+$pink-dark: darken($pink, 10%);
+$dark-theme-text: #F0F0F0;
 
 //general colors
 $white: #fff;
