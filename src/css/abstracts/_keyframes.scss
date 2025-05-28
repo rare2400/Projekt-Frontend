@@ -1,3 +1,5 @@
+@use "../abstracts/variables";
+
 @keyframes moveAround {
     0% {
         transform: rotate(135deg);
@@ -47,5 +49,27 @@
 
     to {
         transform: rotate(360deg);
+    }
+}
+
+@keyframes color-change {
+    0% {
+        color: variables.$header-color;
+    }
+
+    25% {
+        color: variables.$pink;
+    }
+
+    50% {
+        color: variables.$turkos;
+    }
+
+    75% {
+        color: variables.$footer-color;
+    }
+
+    100% {
+        color: variables.$header-color;
     }
 }

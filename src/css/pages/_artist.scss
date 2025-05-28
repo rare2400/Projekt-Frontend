@@ -10,6 +10,10 @@
 .artist-info {
     text-align: center;
 
+    h1 {
+        animation: color-change 7s 1s linear 5;
+    }
+
     img {
         box-shadow: 0 0 10px rgba(0, 0, 0, 0.3);
         animation: fadeIn 2s ease;
