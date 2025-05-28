@@ -108,9 +108,7 @@ async function getTopTracks(artistName) {
     }
 }
 
-/**
- * @type {HTMLAudioElement|null} - current track playing
- */
+// variable for the track currently playing
 let currentTrack = null;
 
 /**
@@ -122,6 +120,7 @@ let currentTrack = null;
  * 
  * display top tracks in DOM with preview functionality
  * 
+ * @function displayTopTracks
  * @param {Track[]} tracks - array of track-object
  * @returns {void}
  */
