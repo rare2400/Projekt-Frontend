@@ -1,0 +1,15 @@
+@use "../abstracts/mixins";
+@use "../abstracts/variables";
+@use "../abstracts/placeholders";
+
+.play-btn {
+    @include mixins.size(variables.$footer-color, 2em, 90%);
+    font-size: 0.7em;
+    border: none;
+    color: variables.$white;
+    cursor: pointer;
+
+    &:hover {
+        @extend %zoom-hover;
+    }
+}
