@@ -1,11 +1,16 @@
 @use "./variables";
 
 //placeholder for hovering
-%hover-pink {
+%hover {
     cursor: pointer;
     transition: 1.5s ease;
     transform: translateY(4px);
     box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.349);
+}
+
+%zoom-hover {
+    transition: 1s ease;
+    transform: scale(1.1);
 }
 
 %link {
