@@ -109,9 +109,20 @@ async function getTopTracks(artistName) {
 }
 
 /**
- * display top tracks in DOM
+ * @type {HTMLAudioElement|null} - current track playing
+ */
+let currentTrack = null;
+
+/**
+ * @typedef {Object} Track
+ * @property {string} name - name of the track
+ * @property {Object} artist - artist object
+ * @property {string} artist.name - name of the artist
+ * @property {string} preview - URL to the track preview
  * 
- * @param {Array<Object>} tracks - array of track-object
+ * display top tracks in DOM with preview functionality
+ * 
+ * @param {Track[]} tracks - array of track-object
  * @returns {void}
  */
 function displayTopTracks(tracks) {
@@ -121,15 +132,64 @@ function displayTopTracks(tracks) {
 
     if (tracks.length > 0) {
         tracks.forEach(track => {
+            //create elements and add classes
+            const liRow = document.createElement("div");
+            liRow.classList.add("li-row");
             const listItem = document.createElement("li");
-            const trackLink = document.createElement("a");
+            const playBtn = document.createElement("button");
+            playBtn.classList.add("play-btn");
+            const stopBtn = document.createElement("button");
+            stopBtn.classList.add("play-btn");
 
-            trackLink.href = track.url;
-            trackLink.target = "_blank";
-            trackLink.textContent = `${track.name} - ${track.artist.name}`;
+            //text content for the elements
+            listItem.textContent = `${track.name} - ${track.artist.name}`;
 
-            listItem.appendChild(trackLink);
-            topTracksList.appendChild(listItem);
+            //text vontent for the buttons
+            playBtn.textContent = "Play";
+            stopBtn.textContent = "Stop";
+
+            //play button functionality
+            playBtn.addEventListener("click", async () => {
+                if (currentTrack) {
+                    currentTrack.pause();
+                    currentTrack.currentTime = 0;
+                }
+
+                //fetch preview-URL from Deezer API
+                const url = `https://api.deezer.com/search?q=track:"${encodeURIComponent(track.name)}" artist:"${encodeURIComponent(track.artist.name)}"`;
+                try {
+                    const response = await fetch(`https://corsproxy.io/?${encodeURIComponent(url)}`);
+                    const data = await response.json();
+                    //lowercase comparison to find the matching track
+                    const matchTrack = data.data.find(item =>
+                        item.artist.name.toLowerCase() === track.artist.name.toLowerCase() &&
+                        item.title.toLowerCase() === track.name.toLowerCase()
+                    );
+
+                    let previewUrl = matchTrack?.preview || data.data[0]?.preview;
+                    if (previewUrl) {
+                        currentTrack = new Audio(previewUrl);
+                        currentTrack.play();
+                    } else {
+                        alert("Ingen förhandslyssning är tillgänglig för denna låt!");
+                    }
+                } catch (error) {
+                    console.error("Fel vid uppspelning av förhandslyssning", error);
+                }
+            });
+
+            //pause button functionality
+            stopBtn.addEventListener("click", () => {
+                if (currentTrack) {
+                    currentTrack.pause();
+                }
+            });
+
+            //put elements together
+            liRow.appendChild(listItem);
+            liRow.appendChild(playBtn);
+            liRow.appendChild(stopBtn);
+            topTracksList.appendChild(liRow);
         });
     } else {
         console.log("Inga låtar hittades för denna artist.");
@@ -178,9 +238,9 @@ function displaySimilarArtists(artists) {
             similarArtistsList.appendChild(listItem);
         });
     } else {
-        console.log("Inga liknande artister hittades.");
         const errorMessage = document.createElement("p");
         errorMessage.textContent = "Inga liknande artister hittades.";
+        errorMessage.style.padding = "0.5em 2em";
         similarArtistsList.appendChild(errorMessage);
     }
 }
@@ -255,9 +315,9 @@ function displayConcerts(concerts) {
             concertList.appendChild(container);
         });
     } else {
-        console.log("Inga konserter hittades för denna artist.");
         const errorMessage = document.createElement("p");
         errorMessage.textContent = "Inga konserter hittades för denna artist.";
+        errorMessage.style.padding = "0.5em 2em";
         concertList.appendChild(errorMessage);
     }
 }
