@@ -1,0 +1,55 @@
+@use "../abstracts/variables";
+@media (prefers-color-scheme: dark) {
+    body {
+        background-color: variables.$dark-background;
+        color: variables.$background-color;
+    }
+
+    h1,
+    h2 {
+        color: variables.$dark-theme-text;
+        text-shadow: 2px 2px 4px rgba(0,0,0,0.6);
+    }
+
+    footer {
+        background-color: variables.$footer-dark;
+        color: variables.$dark-theme-text;
+    }
+
+    nav {
+        li:hover {
+            background-color: variables.$footer-dark;
+        }
+    }
+
+    .hero-image {
+        position: relative;
+
+        .overlay {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 98%;
+            background-color: rgba(0, 0, 0, 0.151);
+        }
+    }
+
+    .list-container,
+    .artist-concerts,
+    .text-box {
+        background-color: variables.$lighter-grey;
+    }
+
+    .content,
+    .artist-content {
+        a {
+            color: variables.$dark-theme-text;
+        }
+    }
+
+    .play-btn,
+    .back-btn {
+        background-color: variables.$pink-dark;
+    }
+}
