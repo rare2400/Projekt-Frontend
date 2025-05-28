@@ -35,7 +35,7 @@ nav {
         }
 
         &:hover {
-            @extend %hover-pink !optional;
+            @extend %hover !optional;
             background-color: variables.$pink;
         }
     }
