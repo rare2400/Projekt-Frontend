@@ -81,8 +81,7 @@
 
         #box1 {
             grid-column: 1/4;
-            display: grid;
-            grid-template-columns: repeat(2, 1fr);
+            @include mixins.grid(2);
 
             li {
                 font-size: 1em;
