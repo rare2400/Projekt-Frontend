@@ -4,8 +4,9 @@
   "source": "src/index.html",
   "scripts": {
     "start": "parcel",
-    "jsdoc": "jsdoc src/js/*",
-    "build": "parcel build && jsdoc src/js/*"
+    "jsdoc": "jsdoc -c jsdoc/conf.json",
+    "build": "parcel build",
+    "build:all": "npm run build && npm run jsdoc"
   },
   "author": "Ramona Reinholdz",
   "license": "ISC",
