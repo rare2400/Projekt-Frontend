@@ -1,3 +1,5 @@
+"use strict";
+
 //fetch searchform to get artist
 const artistSearch = document.getElementById("search-form");
 

@@ -1,3 +1,5 @@
+"use strict";
+
 //last.fm and ticketmaster API keys
 const apikey = "1fceb8e923bab7aefbfc3b7b526a26ab"
 const concertApikey = "DHOhBMoFKvOXDJD5HEN0wno3M6d6bN2Q";
