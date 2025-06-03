@@ -77,7 +77,7 @@
     }
 
     .artist-content {
-        @include mixins.grid(2);
+        @include mixins.grid();
 
         #box1 {
             grid-column: 1/4;

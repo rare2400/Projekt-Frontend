@@ -1,7 +1,6 @@
 @use "../abstracts/mixins";
 @use "../abstracts/variables";
 @use "../abstracts/placeholders";
-@use "../abstracts/keyframes";
 
 .main-content {
     animation: fadeIn 2s ease;
