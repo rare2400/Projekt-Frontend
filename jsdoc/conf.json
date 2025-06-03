@@ -1,0 +1,27 @@
+{
+    "source": {
+        "include": [
+            "src/js"
+        ],
+        "includePattern": ".js$",
+        "excludePattern": "(^|\\/|\\\\)_"
+    },
+    "sourceType": "module",
+    "opts": {
+        "template": "templates/default",
+        "encoding": "utf8",
+        "destination": "./dist/docs/",
+        "recurse": true
+    },
+    "tags": {
+        "allowUnknownTags": true,
+        "dictionaries": [
+            "jsdoc",
+            "closure"
+        ]
+    },
+    "templates": {
+        "cleverLinks": false,
+        "monospaceLinks": false
+    }
+}
