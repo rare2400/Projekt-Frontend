@@ -15,12 +15,12 @@ liknande artister, samt en lista över kommande konserter.
 git clone https://github.com/rare2400/Projekt-Frontend.git
 ```
 
-3. Installera paket
+2. Installera paket
 ```bash
 npm install
 ```
 
-4. Starta utvecklingsserver
+3. Starta utvecklingsserver
 ```bash
 npm run start
 ```
