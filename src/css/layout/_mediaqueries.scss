@@ -76,16 +76,19 @@
         }
     }
 
+    .content,
+    .artist-content {
+        li {
+            font-size: 1em;
+        }
+    }
+
     .artist-content {
         @include mixins.grid();
 
         #box1 {
             grid-column: 1/4;
             @include mixins.grid(2);
-
-            li {
-                font-size: 1em;
-            }
         }
 
         #box2 {
